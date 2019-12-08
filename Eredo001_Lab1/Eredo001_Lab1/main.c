@@ -57,7 +57,7 @@ int SMTick1(int state) {
 		break;
 		
 		case led2:
-		Three_LED = 0x01;
+		Three_LED = 0x02;
 		PORTB = Three_LED;
 		break;
 		
@@ -94,6 +94,7 @@ int SMTick2(int state2) {
 		else {
 			state = ledOn;
 			break;
+		}
 	}
 	
 	switch(state2) {
@@ -140,13 +141,13 @@ int main(void)
 		const unsigned short numTasks = sizeof(tasks)/sizeof(task*);
 
 		// Task 1
-		task1.state = -1;//Task initial state.
+		task1.state = init;//Task initial state.
 		task1.period = SMTick1_period;//Task Period.
 		task1.elapsedTime = SMTick1_period;//Task current elapsed time.
 		task1.TickFct = &SMTick1;//Function pointer for the tick.
 
 		// Task 2
-		task2.state = -1;//Task initial state.
+		task2.state = ledWait;//Task initial state.
 		task2.period = SMTick2_period;//Task Period.
 		task2.elapsedTime = SMTick2_period;//Task current elapsed time.
 		task2.TickFct = &SMTick2;//Function pointer for the tick.
